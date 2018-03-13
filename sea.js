@@ -159,7 +159,11 @@
         subtle,
         TextEncoder,
         TextDecoder,
-        random: (len) => Buffer.from(crypto.getRandomValues(new Uint8Array(Buffer.alloc(len))))
+        random: (len) => {
+          const arr = new Uint8Array(Buffer.alloc(len))
+          crypto.getRandomValues(arr)
+          return Buffer.from(arr)
+        }
       })
     } else {
       const crypto = require('crypto')
